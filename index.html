@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Renovalex</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a2d9d6a64f.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="logo"><span>Renovalex</span></div>
+  <nav>
+    <a href="#servicios">Servicios</a>
+    <a href="#tecnologia">Tecnología</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <img class="hero-bg"
+    src="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=2000&auto=format&fit=crop"
+    alt="">
+  <div class="overlay"></div>
+  <div class="hero-content reveal">
+    <span class="tag">Energía inteligente del futuro</span>
+    <h1>Instalaciones sostenibles premium</h1>
+    <p>Paneles solares, baterías domésticas y cargadores eléctricos con tecnología avanzada.</p>
+  </div>
+</section>
+
+<section id="servicios">
+  <div class="section-title reveal"><h2>Servicios</h2></div>
+  <div class="service-grid reveal">
+    <div class="service-card">
+      <img src=""><i class="fa-solid fa-solar-panel"></i>
+      <h3>Paneles solares</h3><p>Energía limpia y eficiente para tu hogar.</p>
+    </div>
+    <div class="service-card">
+      <img src=""><i class="fa-solid fa-battery-full"></i>
+      <h3>Baterías domésticas</h3><p>Almacena energía y úsala cuando quieras.</p>
+    </div>
+    <div class="service-card">
+      <img src=""><i class="fa-solid fa-charging-station"></i>
+      <h3>Cargadores EV</h3><p>Recarga rápida e inteligente.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     HOUSE SCROLL — DIORAMA 2D
+     Escena única y estática. El scroll mueve solo la cámara.
+     ═══════════════════════════════════════════════════════ -->
+<section class="house-scroll" id="tecnologia" aria-label="Experiencia interactiva de servicios">
+
+  <div class="house-scroll__sticky">
+    <div class="house-scroll__bg" aria-hidden="true"></div>
+
+    <div class="house-scroll__viewport">
+
+      <!-- CÁMARA: recibe scale() translate() del JS. NUNCA rotateY. -->
+      <div class="house-scroll__camera" id="houseScrollCamera">
+
+        <!-- ══ DIORAMA — todos los elementos visibles desde el inicio ══ -->
+
+        <!-- Nubes y sol -->
+        <div class="hs-cloud hs-cloud--1" aria-hidden="true"></div>
+        <div class="hs-cloud hs-cloud--2" aria-hidden="true"></div>
+        <div class="hs-cloud hs-cloud--3" aria-hidden="true"></div>
+        <div class="hs-sun"               aria-hidden="true"></div>
+
+        <!-- Suelo y calle -->
+        <div class="hs-ground" aria-hidden="true">
+          <div class="hs-road"></div>
+        </div>
+
+        <!-- Jardín -->
+        <div class="hs-garden" aria-hidden="true"></div>
+
+        <!-- Árbol izquierdo -->
+        <div class="hs-tree hs-tree--left" aria-hidden="true">
+          <div class="hs-tree__crown"></div>
+          <div class="hs-tree__trunk"></div>
+        </div>
+
+        <!-- ── SISTEMA DE BATERÍAS — visible desde el inicio (lateral izq.) ── -->
+        <div class="hs-batteries" aria-label="Sistema de baterías">
+          <span class="hs-batteries__label">Baterías</span>
+          <div class="hs-batteries__unit">
+            <div class="hs-batteries__row">
+              <div class="hs-battery-cell"></div>
+              <div class="hs-battery-cell"></div>
+              <div class="hs-battery-cell"></div>
+            </div>
+            <div class="hs-batteries__row">
+              <div class="hs-battery-cell"></div>
+              <div class="hs-battery-cell"></div>
+              <div class="hs-battery-cell"></div>
+            </div>
+          </div>
+          <div class="hs-batteries__cable"></div>
+        </div>
+
+        <!-- ── CASA PRINCIPAL ── -->
+        <div class="hs-house" aria-label="Vivienda principal">
+          <!-- Tejado con placas solares -->
+          <div class="hs-roof">
+            <div class="hs-roof__shape"></div>
+            <div class="hs-roof__gutter"></div>
+            <!-- Placas solares: visibles desde el inicio -->
+            <div class="hs-solar hs-solar--left" aria-label="Placas solares">
+              <div class="hs-solar-cell"></div><div class="hs-solar-cell"></div>
+              <div class="hs-solar-cell"></div><div class="hs-solar-cell"></div>
+              <div class="hs-solar-cell"></div><div class="hs-solar-cell"></div>
+              <div class="hs-solar-cell"></div><div class="hs-solar-cell"></div>
+              <div class="hs-solar-cell"></div><div class="hs-solar-cell"></div>
+            </div>
+            <div class="hs-solar hs-solar--right" aria-hidden="true">
+              <div class="hs-solar-cell"></div><div class="hs-solar-cell"></div>
+              <div class="hs-solar-cell"></div><div class="hs-solar-cell"></div>
+              <div class="hs-solar-cell"></div><div class="hs-solar-cell"></div>
+              <div class="hs-solar-cell"></div><div class="hs-solar-cell"></div>
+              <div class="hs-solar-cell"></div><div class="hs-solar-cell"></div>
+            </div>
+          </div>
+          <!-- Fachada -->
+          <div class="hs-facade">
+            <div class="hs-window hs-window--left"></div>
+            <div class="hs-window hs-window--right"></div>
+            <div class="hs-door"></div>
+          </div>
+        </div>
+
+        <!-- ── GARAJE — lateral derecho ── -->
+        <div class="hs-garage" aria-hidden="true">
+          <div class="hs-garage__roof"></div>
+          <div class="hs-garage__wall">
+            <div class="hs-garage__door"></div>
+          </div>
+        </div>
+
+        <!-- Árbol derecho -->
+        <div class="hs-tree hs-tree--right" aria-hidden="true">
+          <div class="hs-tree__crown"></div>
+          <div class="hs-tree__trunk"></div>
+        </div>
+
+        <!-- ── VEHÍCULO ELEVADOR — en la calle, visible desde el inicio ── -->
+        <div class="hs-lift" aria-label="Vehículo elevador">
+          <div class="hs-lift__arm-wrap">
+            <div class="hs-lift__basket">
+              <div class="hs-lift__tech-body"></div>
+              <div class="hs-lift__tech-head"></div>
+            </div>
+            <div class="hs-lift__arm-segment hs-lift__arm-segment--2"></div>
+            <div class="hs-lift__arm-segment hs-lift__arm-segment--1"></div>
+          </div>
+          <div class="hs-lift__truck">
+            <div class="hs-lift__body">
+              <div class="hs-lift__cabin"></div>
+            </div>
+            <div class="hs-lift__chassis"></div>
+            <div class="hs-lift__wheels">
+              <div class="hs-lift__wheel"></div>
+              <div class="hs-lift__wheel"></div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /.house-scroll__camera -->
+
+      <!-- ── TARJETAS INFORMATIVAS ── -->
+      <div class="house-scroll__cards">
+
+        <article class="house-scroll__card" data-stage="mantenimiento">
+          <span class="house-scroll__card-tag">Servicio 01</span>
+          <h2>Mantenimiento</h2>
+          <p>Cuidamos tus placas solares con revisiones periódicas, limpieza profesional y máximo rendimiento durante toda la vida útil de la instalación.</p>
+        </article>
+
+        <article class="house-scroll__card" data-stage="energeticas">
+          <span class="house-scroll__card-tag">Servicio 02</span>
+          <h2>Instalaciones Energéticas</h2>
+          <p>Proyectos a medida con equipos de elevación y plataformas para técnicos certificados, garantizando seguridad en cada intervención en altura.</p>
+        </article>
+
+        <article class="house-scroll__card" data-stage="instalaciones">
+          <span class="house-scroll__card-tag">Servicio 03</span>
+          <h2>Instalaciones</h2>
+          <p>Diseñamos e integramos sistemas fotovoltaicos optimizando cada superficie de tu vivienda. Instalación certificada con los mejores materiales del mercado.</p>
+        </article>
+
+        <article class="house-scroll__card" data-stage="baterias">
+          <span class="house-scroll__card-tag">Servicio 04</span>
+          <h2>Baterías</h2>
+          <p>Almacenamiento inteligente para autoconsumo: acumula energía solar y úsala cuando más la necesites, de día o de noche.</p>
+        </article>
+
+      </div>
+
+      <!-- Indicador de scroll -->
+      <div class="house-scroll__intro">
+        <p>Desplázate para explorar cada servicio</p>
+        <div class="house-scroll__progress" aria-hidden="true">
+          <div class="house-scroll__progress-bar" id="houseScrollProgress"></div>
+        </div>
+      </div>
+
+      <!-- Dots de etapa -->
+      <nav class="house-scroll__dots" aria-label="Etapas del servicio">
+        <button class="house-scroll__dot" data-dot="0" aria-label="Mantenimiento"></button>
+        <button class="house-scroll__dot" data-dot="1" aria-label="Instalaciones"></button>
+        <button class="house-scroll__dot" data-dot="2" aria-label="Instalaciones Energéticas"></button>
+        <button class="house-scroll__dot" data-dot="3" aria-label="Baterías"></button>
+      </nav>
+
+    </div><!-- /.house-scroll__viewport -->
+  </div><!-- /.house-scroll__sticky -->
+
+</section>
+<!-- ═══ FIN HOUSE SCROLL ═══ -->
+
+<section id="contacto">
+  <div class="section-title reveal"><h2>Contacto</h2></div>
+  <form action="https://formsubmit.co/tuemail@gmail.com" method="POST">
+    <input type="text" placeholder="Nombre" required>
+    <input type="email" placeholder="Correo electrónico" required>
+    <textarea placeholder="Cuéntanos tu proyecto"></textarea>
+    <button type="submit">Enviar solicitud</button>
+  </form>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
