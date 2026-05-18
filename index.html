@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Renovalex – Ingeniería y mantenimiento sostenible en Madrid</title>
+<meta name="description" content="Renovalex ofrece proyectos, montajes y mantenimiento en instalaciones técnicas y energías renovables en Madrid. Soluciones integrales.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F7FAFF;
+  --surface: #FFFFFF;
+  --fg: #333333;
+  --fg-heading: #000000;
+  --muted: #6B7280;
+  --border: #D1D5DB;
+  --accent: #FC6722;
+  --accent-hover: #e8550f;
+  --overlay: rgba(0,0,0,0.72);
+
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --max-w: 1300px;
+  --section-py: clamp(48px, 8vw, 80px);
+  --container-px: clamp(16px, 4vw, 60px);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); color: var(--fg); background: var(--bg); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--container-px); }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font); font-size: 16px; font-weight: 500;
+  padding: 10px 35px; border-radius: 100px;
+  border: 2px solid var(--accent);
+  background: var(--accent); color: #fff;
+  cursor: pointer; transition: all 0.3s ease;
+}
+.btn:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: #fff; }
+.btn-outline { background: transparent; color: var(--accent); }
+.btn-outline:hover { background: var(--accent); color: #fff; }
+
+.section-title {
+  font-size: clamp(28px, 3.5vw, 40px); font-weight: 600;
+  color: var(--fg-heading); line-height: 1.2; margin-bottom: 12px;
+}
+.section-sub { font-size: 16px; color: var(--muted); max-width: 640px; line-height: 1.6; }
+
+/* Animation states for scrolltelling */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* Stagger children */
+.stagger > * { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.stagger.visible > * { opacity: 1; transform: translateY(0); }
+.stagger.visible > *:nth-child(1) { transition-delay: 0.05s; }
+.stagger.visible > *:nth-child(2) { transition-delay: 0.15s; }
+.stagger.visible > *:nth-child(3) { transition-delay: 0.25s; }
+.stagger.visible > *:nth-child(4) { transition-delay: 0.35s; }
+.stagger.visible > *:nth-child(5) { transition-delay: 0.45s; }
+
+/* ===== HEADER ===== */
+.top-bar {
+  background: var(--accent); color: #fff;
+  font-size: 14px; font-weight: 400;
+  display: flex; justify-content: flex-end; align-items: center;
+  gap: 24px; padding: 8px var(--container-px);
+  max-width: 100%;
+}
+.top-bar a { color: #fff; display: inline-flex; align-items: center; gap: 6px; }
+.top-bar a:hover { text-decoration: underline; }
+
+.main-header {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  transition: box-shadow 0.3s ease;
+}
+.main-header.scrolled { box-shadow: 0 1px 6px rgba(0,0,0,0.12); }
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  max-width: var(--max-w); margin: 0 auto;
+  padding: 12px var(--container-px); gap: 16px;
+}
+
+.logo img { height: clamp(40px, 5vw, 60px); width: auto; object-fit: contain; }
+
+.nav { display: flex; align-items: center; gap: 28px; }
+.nav a {
+  font-size: 15px; font-weight: 400; color: var(--fg);
+  position: relative; padding: 4px 0; transition: color 0.2s;
+}
+.nav a::after {
+  content: ''; position: absolute; bottom: -2px; left: 0;
+  width: 0; height: 2px; background: var(--accent);
+  transition: width 0.3s ease;
+}
+.nav a:hover { color: var(--accent); }
+.nav a:hover::after { width: 100%; }
+
+.menu-toggle { display: none; background: none; border: none; font-size: 28px; cursor: pointer; color: var(--fg); padding: 4px; }
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  min-height: clamp(60vh, 70vh, 80vh);
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; color: #fff;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(var(--overlay), var(--overlay)),
+    url('https://b70761150.es/wp-content/uploads/sites/508/2025/08/InstalacionesSolares06.jpeg') center/cover no-repeat;
+}
+.hero-content { position: relative; z-index: 1; max-width: 800px; padding: 0 var(--container-px); }
+.hero h1 {
+  font-size: clamp(32px, 5vw, 52px); font-weight: 600;
+  line-height: 1.15; margin-bottom: 16px;
+}
+.hero p {
+  font-size: clamp(16px, 1.5vw, 20px); font-weight: 400;
+  line-height: 1.6; margin-bottom: 28px; opacity: 0.92;
+}
+.hero .btn { margin-top: 8px; }
+
+/* ===== WHY SECTION ===== */
+.why { padding: var(--section-py) 0; background: var(--surface); }
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px; margin-top: 40px;
+}
+.why-card {
+  border: 2px solid var(--accent); border-radius: 5px;
+  padding: 28px 24px; background: var(--surface);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.why-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(252,103,34,0.1); }
+.why-card .icon {
+  width: 48px; height: 48px; border-radius: 8px;
+  background: var(--accent); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; font-weight: 700; margin-bottom: 16px;
+}
+.why-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--fg-heading); }
+.why-card p { font-size: 15px; color: var(--fg); line-height: 1.7; }
+
+/* ===== VALUES ===== */
+.values {
+  padding: var(--section-py) 0; background: var(--bg);
+}
+.values-tag {
+  display: inline-flex; gap: 16px; flex-wrap: wrap; margin-top: 24px;
+}
+.values-tag span {
+  display: inline-block; padding: 6px 18px;
+  border: 1.5px solid var(--accent); border-radius: 100px;
+  font-size: 14px; font-weight: 500; color: var(--accent);
+  background: rgba(252,103,34,0.06);
+}
+
+/* ===== SERVICES (scrolltelling) ===== */
+.services { padding: var(--section-py) 0; background: var(--surface); }
+.services-intro { text-align: center; margin-bottom: 48px; }
+.services-intro .section-sub { margin: 0 auto; }
+
+.service-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(24px, 5vw, 100px);
+  align-items: center;
+  padding: 60px 0;
+  border-bottom: 1px solid var(--border);
+}
+.service-block:last-child { border-bottom: none; }
+.service-block.reverse { direction: rtl; }
+.service-block.reverse > * { direction: ltr; }
+
+.service-img {
+  border-radius: 5px; overflow: hidden;
+  height: clamp(280px, 35vw, 420px);
+}
+.service-img img { width: 100%; height: 100%; object-fit: cover; }
+.service-img .placeholder {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  background: #e5e7eb; color: var(--muted); font-size: 14px;
+}
+
+.service-text { max-width: 520px; }
+.service-text .eyebrow {
+  font-size: 14px; font-weight: 500; color: var(--accent);
+  text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px;
+}
+.service-text h2 {
+  font-size: clamp(24px, 3vw, 34px); font-weight: 600;
+  color: var(--fg-heading); line-height: 1.2; margin-bottom: 12px;
+}
+.service-text p { font-size: 15px; line-height: 1.7; margin-bottom: 16px; }
+.service-text ul { margin-bottom: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+.service-text ul li {
+  font-size: 14px; padding: 4px 14px;
+  border: 1px solid var(--border); border-radius: 100px;
+  background: var(--bg);
+}
+
+/* ===== CTA BANNER ===== */
+.cta-banner {
+  position: relative; min-height: 50vh;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; color: #fff; overflow: hidden;
+}
+.cta-banner .hero-bg {
+  background:
+    linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+    url('https://b70761150.es/wp-content/uploads/sites/508/2025/08/InstalacionesSolares10.jpeg') center/cover no-repeat;
+}
+.cta-banner .hero-content { max-width: 680px; }
+.cta-banner h2 { font-size: clamp(26px, 3.5vw, 38px); font-weight: 600; margin-bottom: 12px; }
+.cta-banner p { font-size: 16px; opacity: 0.9; margin-bottom: 24px; }
+
+/* ===== CONTACT ===== */
+.contact { padding: var(--section-py) 0; background: var(--bg); }
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(24px, 5vw, 80px);
+  align-items: start;
+  margin-top: 40px;
+}
+.contact-info h3 { font-size: 20px; font-weight: 600; color: var(--fg-heading); margin-bottom: 16px; }
+.contact-info p { font-size: 15px; line-height: 1.7; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.contact-info p svg { flex-shrink: 0; color: var(--accent); }
+
+.contact-form { display: flex; flex-direction: column; gap: 14px; }
+.contact-form input,
+.contact-form textarea {
+  font-family: var(--font); font-size: 15px;
+  padding: 12px 16px; border: 1.5px solid var(--border);
+  border-radius: 8px; background: var(--surface);
+  color: var(--fg); outline: none;
+  transition: border-color 0.2s;
+}
+.contact-form input:focus,
+.contact-form textarea:focus { border-color: var(--accent); }
+.contact-form textarea { min-height: 120px; resize: vertical; }
+.contact-form .btn { align-self: flex-start; }
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--surface); border-top: 2px solid #ADADAD;
+  padding: clamp(40px, 6vw, 70px) var(--container-px) 0;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.25fr;
+  gap: clamp(24px, 4vw, 50px);
+  max-width: var(--max-w); margin: 0 auto;
+  padding-bottom: clamp(40px, 6vw, 60px);
+}
+.footer-col h4 { font-size: 16px; font-weight: 600; color: var(--fg-heading); margin-bottom: 16px; }
+.footer-col p, .footer-col a { font-size: 14px; color: var(--fg); line-height: 1.8; }
+.footer-col a:hover { color: var(--accent); }
+.footer-col .logo-foot img { height: 40px; margin-bottom: 12px; }
+
+.footer-social { display: flex; gap: 8px; margin-top: 12px; }
+.footer-social a {
+  display: flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px;
+  background: var(--fg); color: #fff;
+  border-radius: 6px; font-size: 16px; transition: background 0.2s;
+}
+.footer-social a:hover { background: var(--accent); }
+
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding: 20px var(--container-px);
+  display: flex;
+  justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px;
+  max-width: var(--max-w); margin: 0 auto;
+  font-size: 13px; color: var(--muted);
+}
+.footer-bottom a { color: var(--fg); }
+.footer-bottom a:hover { color: var(--accent); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .menu-toggle { display: block; }
+  .nav {
+    display: none; flex-direction: column;
+    position: absolute; top: 100%; left: 0; right: 0;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 16px 24px; gap: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+  .nav.open { display: flex; }
+
+  .service-block {
+    grid-template-columns: 1fr;
+    gap: 20px; padding: 40px 0;
+  }
+  .service-block.reverse { direction: ltr; }
+  .service-img { height: 240px; }
+
+  .contact-grid { grid-template-columns: 1fr; }
+  .hero { min-height: 60vh; }
+}
+@media (max-width: 480px) {
+  .top-bar { flex-direction: column; gap: 4px; padding: 6px 12px; font-size: 13px; }
+  .why-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+}
+
+/* ===== HAMBURGER ANIMATION ===== */
+.hamburger { width: 28px; height: 20px; position: relative; }
+.hamburger span {
+  display: block; position: absolute; height: 2px; width: 100%;
+  background: var(--fg); border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.hamburger span:nth-child(1) { top: 0; }
+.hamburger span:nth-child(2) { top: 9px; }
+.hamburger span:nth-child(3) { top: 18px; }
+.menu-toggle.open .hamburger span:nth-child(1) { transform: rotate(45deg); top: 9px; }
+.menu-toggle.open .hamburger span:nth-child(2) { opacity: 0; }
+.menu-toggle.open .hamburger span:nth-child(3) { transform: rotate(-45deg); top: 9px; }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <a href="tel:613008020">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    613 008 020
+  </a>
+  <a href="mailto:info@renovalex.es">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    info@renovalex.es
+  </a>
+</div>
+
+<!-- HEADER -->
+<header class="main-header" id="header">
+  <div class="header-inner">
+    <a href="/" class="logo" aria-label="Renovalex inicio">
+      <img src="https://b70761150.es/wp-content/uploads/sites/508/2025/08/fondo_blanco.png" alt="Renovalex" height="60">
+    </a>
+    <nav class="nav" id="nav">
+      <a href="#hero">Inicio</a>
+      <a href="#why">Filosofía</a>
+      <a href="#services">Servicios</a>
+      <a href="#contact">Contacto</a>
+      <a href="#contact" class="btn btn-outline" style="padding:6px 24px;font-size:14px;">Solicitar instalación</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menú">
+      <div class="hamburger"><span></span><span></span><span></span></div>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content reveal visible">
+    <h1>Energía solar y eficiencia para tu hogar</h1>
+    <p>Instalamos fotovoltaica residencial, cargadores de vehículo eléctrico y aerotermia, además de climatización e instalaciones eléctricas en Madrid.</p>
+    <a href="#contact" class="btn btn-outline" style="color:#fff;border-color:#fff;">Solicitar instalación</a>
+  </div>
+</section>
+
+<!-- WHY RENOVALEX -->
+<section class="why" id="why">
+  <div class="container">
+    <div class="reveal">
+      <h2 class="section-title">¿Por qué elegir Renovalex?</h2>
+      <p class="section-sub">Trabajamos para ofrecer soluciones sostenibles y de calidad, siempre con un enfoque cercano, técnico y responsable.</p>
+    </div>
+    <div class="why-grid stagger" id="whyGrid">
+      <div class="why-card">
+        <div class="icon">V</div>
+        <h3>Visión</h3>
+        <p>Ofrecer soluciones energéticas sostenibles y de calidad, siempre con un enfoque cercano, técnico y responsable.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon">M</div>
+        <h3>Misión</h3>
+        <p>Nuestra razón de existir radica en la necesidad de cambiar los modelos energéticos de las sociedades para conseguir un modelo sostenible para el planeta.</p>
+      </div>
+      <div class="why-card">
+        <div class="icon">V</div>
+        <h3>Valores</h3>
+        <p>Honestidad, calidad, compromiso, excelencia y orientación al cliente. Cuidamos tus instalaciones durante toda su vida útil.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values">
+  <div class="container">
+    <div class="reveal" style="text-align:center;">
+      <h2 class="section-title">Nuestros valores</h2>
+      <p class="section-sub" style="margin:0 auto;">Cinco principios que guían cada proyecto que emprendemos.</p>
+    </div>
+    <div class="values-tag reveal" style="justify-content:center;">
+      <span>Honestidad</span>
+      <span>Calidad</span>
+      <span>Compromiso</span>
+      <span>Excelencia</span>
+      <span>Orientación al cliente</span>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES (scrolltelling) -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="services-intro reveal">
+      <h2 class="section-title">Nuestros servicios</h2>
+      <p class="section-sub">Soluciones integrales en energía solar, climatización y mantenimiento para hogares y empresas en Madrid.</p>
+    </div>
+
+    <!-- Service 1: Mantenimientos -->
+    <div class="service-block reveal" data-service="1">
+      <div class="service-img">
+        <img src="https://b70761150.es/wp-content/uploads/sites/508/2025/08/FLIR_20230425_012707_927.jpg" alt="Mantenimiento de paneles solares" loading="lazy">
+      </div>
+      <div class="service-text">
+        <p class="eyebrow">Cuidamos tus instalaciones</p>
+        <h2>Mantenimientos</h2>
+        <p>Somos una compañía especializada en el mantenimiento y reparación de sistemas de energía solar fotovoltaica. Entendemos la importancia de un mantenimiento regular para asegurar el óptimo rendimiento y durabilidad de las instalaciones.</p>
+        <ul>
+          <li>Inspección térmica</li>
+          <li>Limpieza de paneles</li>
+          <li>Revisión eléctrica</li>
+          <li>Informes de rendimiento</li>
+        </ul>
+        <a href="#contact" class="btn">Solicitar mantenimiento</a>
+      </div>
+    </div>
+
+    <!-- Service 2: Instalaciones -->
+    <div class="service-block reverse reveal" data-service="2">
+      <div class="service-img">
+        <img src="https://b70761150.es/wp-content/uploads/sites/508/2025/08/Imagen2-1_result.webp" alt="Instalaciones solares" loading="lazy">
+      </div>
+      <div class="service-text">
+        <p class="eyebrow">A medida para cada proyecto</p>
+        <h2>Instalaciones</h2>
+        <p>Diseñamos e implementamos instalaciones que combinan eficiencia, innovación y sostenibilidad. Nuestro objetivo es ofrecer soluciones energéticas y eléctricas adaptadas a las necesidades de cada cliente, garantizando seguridad, confort y ahorro a largo plazo.</p>
+        <ul>
+          <li>Fotovoltaica residencial</li>
+          <li>Cargadores VE</li>
+          <li>Climatización</li>
+          <li>Instalaciones eléctricas</li>
+        </ul>
+        <a href="#contact" class="btn">Solicitar instalación</a>
+      </div>
+    </div>
+
+    <!-- Service 3: Instalaciones energéticas a medida -->
+    <div class="service-block reveal" data-service="3">
+      <div class="service-img">
+        <div class="placeholder" style="background:#e5e7eb url('https://b70761150.es/wp-content/uploads/sites/508/2025/08/InstalacionesSolares10.jpeg') center/cover no-repeat;"></div>
+      </div>
+      <div class="service-text">
+        <p class="eyebrow">Energía que transforma</p>
+        <h2>Instalaciones energéticas a medida</h2>
+        <p>Diseñamos y ejecutamos proyectos que transforman la manera en que las personas y empresas consumen energía. Nos centramos en energía solar fotovoltaica para hogares, instalación de cargadores para vehículos eléctricos y sistemas de aerotermia como soluciones sostenibles de climatización.</p>
+        <p>Además, acompañamos a nuestros clientes con un servicio de mantenimiento integral durante toda la vida útil de sus sistemas.</p>
+        <ul>
+          <li>Aerotermia</li>
+          <li>Solar fotovoltaica</li>
+          <li>Cargadores VE</li>
+          <li>Aire acondicionado</li>
+        </ul>
+        <a href="#contact" class="btn">Solicitar información</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner reveal">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <h2>Haz que tu energía rinda más</h2>
+    <p>En Renovalex estamos listos para ayudarte a dar el paso hacia la eficiencia energética.</p>
+    <a href="#contact" class="btn btn-outline" style="color:#fff;border-color:#fff;">Solicitar instalación</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="reveal" style="text-align:center;">
+      <h2 class="section-title">Contacta con nosotros</h2>
+      <p class="section-sub" style="margin:0 auto;">Estamos en Madrid. Háblanos de tu proyecto y te asesoraremos sin compromiso.</p>
+    </div>
+    <div class="contact-grid reveal">
+      <div class="contact-info">
+        <h3>Información de contacto</h3>
+        <p>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <a href="tel:613008020">613 008 020</a>
+        </p>
+        <p>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <a href="mailto:info@renovalex.es">info@renovalex.es</a>
+        </p>
+        <p>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Madrid, España
+        </p>
+      </div>
+      <form class="contact-form" onsubmit="event.preventDefault();alert('Gracias por tu interés. Te contactaremos pronto.');">
+        <input type="text" placeholder="Nombre completo" required>
+        <input type="email" placeholder="Correo electrónico" required>
+        <input type="tel" placeholder="Teléfono">
+        <textarea placeholder="Cuéntanos tu proyecto..."></textarea>
+        <button type="submit" class="btn">Enviar mensaje</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="logo-foot">
+        <img src="https://b70761150.es/wp-content/uploads/sites/508/2025/08/fondo_blanco.png" alt="Renovalex" height="40">
+      </div>
+      <p>Soluciones integrales en ingeniería, proyectos y mantenimiento de instalaciones técnicas y energías renovables en Madrid.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+        </a>
+        <a href="#" aria-label="Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Menú</h4>
+      <a href="#hero">Inicio</a><br>
+      <a href="#why">Nuestra filosofía</a><br>
+      <a href="#services">Mantenimientos</a><br>
+      <a href="#services">Instalaciones</a><br>
+      <a href="#contact">Contacto</a>
+    </div>
+    <div class="footer-col">
+      <h4>Información</h4>
+      <a href="tel:613008020">613 008 020</a><br>
+      <a href="mailto:info@renovalex.es">info@renovalex.es</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="#">Política de privacidad</a><br>
+      <a href="#">Política de cookies</a><br>
+      <a href="#">Aviso legal</a><br>
+      <a href="#">Declaración de accesibilidad</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>©2026 SERVICIOS SOSTENIBLES RENOVALEX SLU. Todos los derechos reservados.</span>
+    <span>Diseñado con <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--accent)" style="display:inline;vertical-align:-2px;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> para un futuro sostenible</span>
+  </div>
+</footer>
+
+<script>
+// === Scroll shadow on header ===
+const header = document.getElementById('header');
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      header.classList.toggle('scrolled', window.scrollY > 40);
+      ticking = false;
+    });
+    ticking = true;
+  }
+});
+
+// === Mobile menu toggle ===
+const toggle = document.getElementById('menuToggle');
+const nav = document.getElementById('nav');
+toggle.addEventListener('click', () => {
+  toggle.classList.toggle('open');
+  nav.classList.toggle('open');
+});
+// Close on link click
+nav.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    toggle.classList.remove('open');
+    nav.classList.remove('open');
+  });
+});
+
+// === Scrolltelling: Intersection Observer ===
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      if (entry.target.classList.contains('stagger')) {
+        entry.target.classList.add('visible');
+      } else {
+        entry.target.classList.add('visible');
+      }
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal, .stagger').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
